@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 26.2.1E
+Release: 27
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -62,8 +62,8 @@ cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,8 +82,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
 %{_datadir}/backgrounds/images/default.png
-%dir %{_datadir}/gnome-wallpaper-properties
-%{_datadir}/gnome-wallpaper-properties/desktop-backgrounds-basic.xml
+%dir %{_datadir}/gnome-background-properties
+%{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 
 # extra contains big images, plus Propaganda tiles
 %files extra
@@ -103,6 +103,10 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Wed Feb  2 2005 Matthias Clasen <mclasen@redhat.com> - 2.0-27
+- Move .xml files to where the background capplet in
+  Gnome 2.10 will find them
+
 * Mon Oct 18 2004 Alexander Larsson <alexl@redhat.com> - 2.0-26.2.1E
 - RHEL build
 
