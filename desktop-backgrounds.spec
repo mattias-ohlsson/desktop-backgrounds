@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 6
+%define rh_backgrounds_version 7
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 23
+Release: 24
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -61,6 +61,11 @@ cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/*.jpg .
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/*.png .
+
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,6 +79,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
 %{_datadir}/backgrounds/images/default.png
+%{_datadir}/backgrounds/*.png
+%{_datadir}/backgrounds/*.jpg
+%dir %{_datadir}/gnome-wallpaper-properties
+%{_datadir}/gnome-wallpaper-properties/desktop-backgrounds-basic.xml
 
 # extra contains big images, plus Propaganda tiles
 %files extra
@@ -88,6 +97,11 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Mon Sep 27 2004 Matthias Clasen <mclasen@@redhat.com> 2.0.24
+- Prepopulate the list of backgrounds in the background
+  changes with a small set of good backgrounds (#133382)
+- redhat-backgrounds-7
+
 * Thu Sep 09 2004 Elliot Lee <sopwith@redhat.com> 2.0-23
 - Really update the default background.
 
