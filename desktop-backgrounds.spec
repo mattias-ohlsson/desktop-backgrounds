@@ -3,13 +3,14 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 18.1
+Release: 20
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
-Source4: rhel_4_alpha-default.png
+## Source4: beta-placeholder.png
+Source4: default.png
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArchitectures: noarch
 
@@ -50,7 +51,6 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
-## put in placeholder for the beta
 cp -f %{SOURCE4} images/default.png
 
 %install
@@ -88,8 +88,11 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
-* Fri Jan 30 2004 Jonathan Blandford <jrb@redhat.com> 2.0-18.1
-- rhel 4 alpha background
+* Thu May  6 2004 Jeremy Katz <katzj@redhat.com> - 2.0-20
+- background from Garrett for FC2
+
+* Fri Feb 13 2004 Elliot Lee <sopwith@redhat.com>
+- rebuilt
 
 * Sun Nov  2 2003 Elliot Lee <sopwith@redhat.com> 2.0-18
 - redhat-backgrounds-6
