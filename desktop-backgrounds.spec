@@ -1,8 +1,8 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 8
-Copyright: LGPL
+Release: 9
+License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds.tar.gz
 Source2: Propaganda-1.0.0.tar.gz
@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
+%{_datadir}/backgrounds/tiles/*jpg
 %{_datadir}/backgrounds/images/default.png
 
 # extra contains big images, plus Propaganda tiles
@@ -85,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Tue Aug 27 2002 Than Ngo <than@redhat.com> 2.0-9
+- add missing kdebase desktop backgrounds (bug #72508)
+
 * Wed Aug 21 2002 Havoc Pennington <hp@redhat.com>
 - drop the beta placeholder in favor of final background
 
