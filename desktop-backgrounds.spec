@@ -1,10 +1,12 @@
+%define rh_backgrounds_version 2
+
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 10
+Release: 14
 License: LGPL
 Group: Applications/Multimedia
-Source: redhat-backgrounds.tar.gz
+Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 ## Source4: beta-placeholder.png
@@ -38,7 +40,7 @@ to use for your desktop background. It builds on
 desktop-backgrounds-basic.
 
 %prep
-%setup -n redhat-backgrounds
+%setup -n redhat-backgrounds-%{rh_backgrounds_version}
 
 # move things where %doc can find them
 cp %{SOURCE3} .
@@ -57,8 +59,8 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 
-cp -a $RPM_BUILD_DIR/redhat-backgrounds/images .
-cp -a $RPM_BUILD_DIR/redhat-backgrounds/tiles .
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,6 +88,16 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Fri Feb 21 2003 Havoc Pennington <hp@redhat.com> 2.0-14
+- some background tweaks from Garrett
+
+* Wed Jan 22 2003 Tim Powers <timp@redhat.com>
+- rebuilt
+
+* Fri Dec  6 2002 Havoc Pennington <hp@redhat.com>
+- rebuild
+- update redhat-backgrounds version
+
 * Tue Sep  3 2002 Havoc Pennington <hp@redhat.com>
 - new redhat-backgrounds from CVS with new default
 
