@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 4
+%define rh_backgrounds_version 6
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 16
+Release: 18
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -88,8 +88,15 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Sun Nov  2 2003 Elliot Lee <sopwith@redhat.com> 2.0-18
+- redhat-backgrounds-6
+
+* Wed Oct 29 2003 Havoc Pennington <hp@redhat.com> 2.0-17
+- redhat-backgrounds-5
+
 * Tue Sep 23 2003 Michael Fulbright <msf@redhat.com> 2.0-16
-- new fedora background
+- new fedora background 
+- (this change was never committed to cvs -hp)
 
 * Thu Jul 17 2003 Havoc Pennington <hp@redhat.com> 2.0-15
 - background for the beta
