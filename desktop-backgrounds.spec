@@ -1,5 +1,4 @@
 %define rh_backgrounds_version 6
-%define final_release 0
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
@@ -52,9 +51,7 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
-%if %{final_release}
 cp -f %{SOURCE4} images/default.png
-%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,8 +88,8 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
-* Thu Sep 09 2004 Elliot Lee <sopwith@redhat.com> 2.0-22
-- Update the default background.
+* Thu Sep 09 2004 Elliot Lee <sopwith@redhat.com> 2.0-23
+- Really update the default background.
 
 * Wed Jul 07 2004 Elliot Lee <sopwith@redhat.com> 2.0-21
 - Change background for FC3test1
