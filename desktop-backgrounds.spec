@@ -3,14 +3,14 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 25
+Release: 26
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 ## Source4: beta-placeholder.png
-Source4: default.png
+Source4: default-background.png
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArchitectures: noarch
 
@@ -103,6 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Thu Sep 30 2004 Alexander Larsson <alexl@redhat.com> - 2.0-26
+- New default background infrastructure.
+
 * Mon Sep 27 2004 Matthias Clasen <mclasen@@redhat.com> 2.0.25
 - avoid duplicate images
 
