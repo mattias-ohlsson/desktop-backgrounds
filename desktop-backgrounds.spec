@@ -1,9 +1,10 @@
 %define rh_backgrounds_version 6
+%define final_release 0
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 20
+Release: 21
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -51,7 +52,9 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
+%if %{final_release}
 cp -f %{SOURCE4} images/default.png
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -88,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Wed Jul 07 2004 Elliot Lee <sopwith@redhat.com> 2.0-21
+- Change background for FC3test1
+
 * Thu May  6 2004 Jeremy Katz <katzj@redhat.com> - 2.0-20
 - background from Garrett for FC2
 
