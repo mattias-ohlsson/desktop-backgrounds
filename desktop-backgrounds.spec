@@ -1,7 +1,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 9
+Release: 10
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds.tar.gz
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Tue Sep  3 2002 Havoc Pennington <hp@redhat.com>
+- new redhat-backgrounds from CVS with new default
+
 * Tue Aug 27 2002 Than Ngo <than@redhat.com> 2.0-9
 - add missing kdebase desktop backgrounds (bug #72508)
 
