@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 21
+Release: 22
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Thu Sep 09 2004 Elliot Lee <sopwith@redhat.com> 2.0-22
+- Update the default background.
+
 * Wed Jul 07 2004 Elliot Lee <sopwith@redhat.com> 2.0-21
 - Change background for FC3test1
 
