@@ -1,12 +1,13 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 6
+Release: 7
 Copyright: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds.tar.gz
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
+Source4: beta-placeholder.png
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArchitectures: noarch
 
@@ -45,7 +46,10 @@ mv images/space/*.ps .
 mv images/space/README* .
 
 # add propaganda
-(cd wallpapers && tar zxf %{SOURCE2})
+(cd tiles && tar zxf %{SOURCE2})
+
+## put in placeholder for the beta
+cp -f %{SOURCE4} images/default.png
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -54,7 +58,7 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 
 cp -a $RPM_BUILD_DIR/redhat-backgrounds/images .
-cp -a $RPM_BUILD_DIR/redhat-backgrounds/wallpapers .
+cp -a $RPM_BUILD_DIR/redhat-backgrounds/tiles .
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,9 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %files basic
 %defattr(-, root, root)
 %dir %{_datadir}/backgrounds
-%dir %{_datadir}/backgrounds/wallpapers
+%dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
-%{_datadir}/backgrounds/wallpapers/*.png
+%{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/images/default.png
 
 # extra contains big images, plus Propaganda tiles
@@ -74,13 +78,17 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.space PHOTO_FAQ.ps README.Propaganda
 %dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/images
-%dir %{_datadir}/backgrounds/wallpapers
-%{_datadir}/backgrounds/wallpapers/Propaganda
+%dir %{_datadir}/backgrounds/tiles
+%{_datadir}/backgrounds/tiles/Propaganda
 %{_datadir}/backgrounds/images/*
 ## we'll see if rpm likes this
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Tue Aug 13 2002 Havoc Pennington <hp@redhat.com>
+- new redhat-backgrounds with wallpapers moved to tiles
+- overwrite default.png with a placeholder
+
 * Fri Aug  9 2002 Havoc Pennington <hp@redhat.com>
 - new redhat-backgrounds with default.png
 
