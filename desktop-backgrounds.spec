@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 24
+Release: 25
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -61,8 +61,6 @@ cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/*.jpg .
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/*.png .
 
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-wallpaper-properties
@@ -78,9 +76,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
+%{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
+%{_datadir}/backgrounds/images/ladybugs.jpg
+%{_datadir}/backgrounds/images/stone_bird.jpg
+%{_datadir}/backgrounds/images/flowers_and_leaves.jpg
+%{_datadir}/backgrounds/images/earth_from_space.jpg
 %{_datadir}/backgrounds/images/default.png
-%{_datadir}/backgrounds/*.png
-%{_datadir}/backgrounds/*.jpg
 %dir %{_datadir}/gnome-wallpaper-properties
 %{_datadir}/gnome-wallpaper-properties/desktop-backgrounds-basic.xml
 
@@ -94,9 +95,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/tiles/Propaganda
 %{_datadir}/backgrounds/images/*
 ## we'll see if rpm likes this
+%exclude %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
+%exclude %{_datadir}/backgrounds/images/ladybugs.jpg
+%exclude %{_datadir}/backgrounds/images/stone_bird.jpg
+%exclude %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
+%exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Mon Sep 27 2004 Matthias Clasen <mclasen@@redhat.com> 2.0.25
+- avoid duplicate images
+
 * Mon Sep 27 2004 Matthias Clasen <mclasen@@redhat.com> 2.0.24
 - Prepopulate the list of backgrounds in the background
   changes with a small set of good backgrounds (#133382)
