@@ -1,13 +1,13 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 7
+Release: 8
 Copyright: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds.tar.gz
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
-Source4: beta-placeholder.png
+## Source4: beta-placeholder.png
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArchitectures: noarch
 
@@ -49,7 +49,7 @@ mv images/space/README* .
 (cd tiles && tar zxf %{SOURCE2})
 
 ## put in placeholder for the beta
-cp -f %{SOURCE4} images/default.png
+## cp -f %{SOURCE4} images/default.png
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -85,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Wed Aug 21 2002 Havoc Pennington <hp@redhat.com>
+- drop the beta placeholder in favor of final background
+
 * Tue Aug 13 2002 Havoc Pennington <hp@redhat.com>
 - new redhat-backgrounds with wallpapers moved to tiles
 - overwrite default.png with a placeholder
