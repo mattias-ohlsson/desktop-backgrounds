@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 26
+Release: 26.1E
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -103,6 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Thu Sep 30 2004 Alexander Larsson <alexl@redhat.com> - 2.0-26.1E
+- RHEL build
+
 * Thu Sep 30 2004 Alexander Larsson <alexl@redhat.com> - 2.0-26
 - New default background infrastructure.
 

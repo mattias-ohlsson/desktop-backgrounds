@@ -1,0 +1,7 @@
+When you build this package in fedora core, make sure you also build a
+copy for RHEL, since there are a RHEL-specific things that gets added
+when you do that. If you forget this, the new version will not be used
+in RHEL.
+
+If you build e.g. desktop-backgrounds-2.0-26 in fedora, then build
+desktop-backgrounds-2.0-26.1E for RHEL.
