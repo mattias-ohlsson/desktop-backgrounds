@@ -65,6 +65,13 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
+bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
+for I in tiles/Propaganda images/dewdop_left.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
+	images/leafdrops.jpg images/lightrays-transparent.png images/lightrays.png images/lightrays2.png images/raingutter.jpg images/riverstreet_rail.jpg \
+	images/sneaking_branch.jpg; do
+	rm -rf ${bgdir}/${I}
+done
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
