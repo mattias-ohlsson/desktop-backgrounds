@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 27
+Release: 28
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -30,15 +30,15 @@ Obsoletes: desktop-backgrounds
 The desktop-backgrounds-basic package contains a good basic set of 
 images to use for your desktop background.
 
-%package extra
+#package extra
 
-Summary: Desktop background images.
-Group: Applications/Multimedia
+#Summary: Desktop background images.
+#Group: Applications/Multimedia
 
-%description extra
-The desktop-backgrounds-extra package contains a larger set of images
-to use for your desktop background. It builds on
-desktop-backgrounds-basic.
+#description extra
+#The desktop-backgrounds-extra package contains a larger set of images
+#to use for your desktop background. It builds on
+#desktop-backgrounds-basic.
 
 %prep
 %setup -n redhat-backgrounds-%{rh_backgrounds_version}
@@ -86,23 +86,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 
 # extra contains big images, plus Propaganda tiles
-%files extra
-%defattr(-, root, root)
-%doc README.space PHOTO_FAQ.ps README.Propaganda
-%dir %{_datadir}/backgrounds
-%dir %{_datadir}/backgrounds/images
-%dir %{_datadir}/backgrounds/tiles
-%{_datadir}/backgrounds/tiles/Propaganda
-%{_datadir}/backgrounds/images/*
+#files extra
+#defattr(-, root, root)
+#doc README.space PHOTO_FAQ.ps README.Propaganda
+#dir %{_datadir}/backgrounds
+#dir %{_datadir}/backgrounds/images
+#dir %{_datadir}/backgrounds/tiles
+#{_datadir}/backgrounds/tiles/Propaganda
+#{_datadir}/backgrounds/images/*
 ## we'll see if rpm likes this
-%exclude %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
-%exclude %{_datadir}/backgrounds/images/ladybugs.jpg
-%exclude %{_datadir}/backgrounds/images/stone_bird.jpg
-%exclude %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
-%exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
-%exclude %{_datadir}/backgrounds/images/default.png
+#exclude %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
+#exclude %{_datadir}/backgrounds/images/ladybugs.jpg
+#exclude %{_datadir}/backgrounds/images/stone_bird.jpg
+#exclude %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
+#exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
+#exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Tue Feb 22 2005 Elliot Lee <sopwith@redhat.com> 2.0-28
+- Remove extra backgrounds for now to save space.
+
 * Wed Feb  2 2005 Matthias Clasen <mclasen@redhat.com> - 2.0-27
 - Move .xml files to where the background capplet in
   Gnome 2.10 will find them
