@@ -1,4 +1,4 @@
-%define rh_backgrounds_version 8 
+%define rh_backgrounds_version 9 
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
@@ -112,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Wed Apr 27 2005 John (J5) Palmieri <johnp@redhat.com> 2.0-29
 - Add translations
-- redhat-backgrounds-8
+- redhat-backgrounds-9
 
 * Tue Feb 22 2005 Elliot Lee <sopwith@redhat.com> 2.0-28
 - Remove extra backgrounds for now to save space.
