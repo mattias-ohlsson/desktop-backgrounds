@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 7
+%define rh_backgrounds_version 8 
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 28
+Release: 29 
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -110,6 +110,10 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Wed Apr 27 2005 John (J5) Palmieri <johnp@redhat.com> 2.0-29
+- Add translations
+- redhat-backgrounds-8
+
 * Tue Feb 22 2005 Elliot Lee <sopwith@redhat.com> 2.0-28
 - Remove extra backgrounds for now to save space.
 
