@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 9 
+%define rh_backgrounds_version 10 
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 29 
+Release: 30 
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -110,6 +110,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Thu Oct  6 2005 Matthias Clasen <mclasen@redhat.com> 2.0-30
+- Replace earth_from_space.jpg with a non-mirrored version (#163345)
+
 * Wed Apr 27 2005 John (J5) Palmieri <johnp@redhat.com> 2.0-29
 - Add translations
 - redhat-backgrounds-9
