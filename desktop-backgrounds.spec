@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 30 .1
+Release: 30.1
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
-* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
+* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com> 2.0-30.1
 - rebuilt
 
 * Thu Oct  6 2005 Matthias Clasen <mclasen@redhat.com> 2.0-30
