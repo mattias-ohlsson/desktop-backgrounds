@@ -3,7 +3,7 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 30.1
+Release: 31
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -110,6 +110,10 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Mon Dec 19 2005 Ray Strode <rstrode@redhat.com> 2.0-31
+- replace default fedora background with new one
+  from Diana Fong
+
 * Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com> 2.0-30.1
 - rebuilt
 
