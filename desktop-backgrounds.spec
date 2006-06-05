@@ -3,16 +3,14 @@
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 31
+Release: 32
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
-## Source4: beta-placeholder.png
-Source4: default-background.png
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildArchitectures: noarch
+BuildArch: noarch
 
 %description
 The desktop-backgrounds package contains artwork intended 
@@ -51,8 +49,6 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
-cp -f %{SOURCE4} images/default.png
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -88,7 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/stone_bird.jpg
 %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
-%{_datadir}/backgrounds/images/default.png
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 
@@ -110,6 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Mon Jun  5 2006 Matthias Clasen <mclasen@redaht.com> 2.0-32
+- Move the default background to fedora-logos
+
 * Mon Dec 19 2005 Ray Strode <rstrode@redhat.com> 2.0-31
 - replace default fedora background with new one
   from Diana Fong
