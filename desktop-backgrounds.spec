@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
+%{_datadir}/backgrounds/images/default.png
 %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
 %{_datadir}/backgrounds/images/ladybugs.jpg
 %{_datadir}/backgrounds/images/stone_bird.jpg
