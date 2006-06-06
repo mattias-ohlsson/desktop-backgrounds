@@ -68,6 +68,9 @@ for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/fro
 	rm -rf ${bgdir}/${I}
 done
 
+# default background is now in fedora-logos
+rm $RPM_BUILD_ROOT%{_datadir}/backgrounds/images/default.png
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -79,7 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
-%{_datadir}/backgrounds/images/default.png
 %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
 %{_datadir}/backgrounds/images/ladybugs.jpg
 %{_datadir}/backgrounds/images/stone_bird.jpg
@@ -103,9 +105,11 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/stone_bird.jpg
 #exclude %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
-#exclude %{_datadir}/backgrounds/images/default.png
 
 %changelog
+* Mon Jun  5 2006 Matthias Clasen <mclasen@redaht.com> 2.0-33
+- Really remove the default background
+
 * Mon Jun  5 2006 Matthias Clasen <mclasen@redaht.com> 2.0-32
 - Move the default background to fedora-logos
 
