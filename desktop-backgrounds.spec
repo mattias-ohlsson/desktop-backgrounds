@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 10 
+%define rh_backgrounds_version 11 
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 33
+Release: 34
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -70,6 +70,7 @@ done
 
 # default background is now in fedora-logos
 rm $RPM_BUILD_ROOT%{_datadir}/backgrounds/images/default.png
+rm $RPM_BUILD_ROOT%{_datadir}/backgrounds/images/default-wide.png
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -107,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Wed Jul 26 2006 Alexander Larsson <alexl@redhat.com> - 2.0-34
+- Add wide desktop background
+
 * Mon Jun  5 2006 Matthias Clasen <mclasen@redaht.com> 2.0-33
 - Really remove the default background
 
