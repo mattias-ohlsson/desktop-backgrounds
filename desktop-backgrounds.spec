@@ -1,9 +1,9 @@
-%define rh_backgrounds_version 11 
+%define rh_backgrounds_version 12 
 
 Summary: Desktop backgrounds.
 Name: desktop-backgrounds
 Version: 2.0
-Release: 34
+Release: 35
 License: LGPL
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -108,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Thu Jul 27 2006 John (J5) Palmieri <johnp@redhat.com> - 2.0-35
+- Add dual screen background
+
 * Wed Jul 26 2006 Alexander Larsson <alexl@redhat.com> - 2.0-34
 - Add wide desktop background
 
