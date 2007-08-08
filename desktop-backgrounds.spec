@@ -1,10 +1,10 @@
 %define rh_backgrounds_version 14
 
-Summary: Desktop backgrounds.
+Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 2.0
-Release: 37
-License: LGPL
+Release: 38
+License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
@@ -108,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Wed Aug  8 2007 Matthias Clasen <mclasen@redhat.com> - 2.0-38
+- Update the licence field
+
 * Wed Sep 06 2006 John (J5) Palmieri <johnp@redhat.com> - 2.0-37
 - Backgrounds are now changed to jpgs and 4:3 has been replaced
   by a 5:4 aspect image
