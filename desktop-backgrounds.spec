@@ -1,14 +1,16 @@
 %define rh_backgrounds_version 14
+%define infinity_version 0.0.1
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
-Version: 2.0
-Release: 38
+Version: 7.92
+Release: 1
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
+Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -49,6 +51,9 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
+# add infinity
+tar zxf %{SOURCE4}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -58,8 +63,15 @@ cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 
+mkdir infinity
+# copy actual image files
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/*.png infinity
+# copy animation xml file 
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/infinity.xml infinity
+
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/desktop-backgrounds-infinity.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
 bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
@@ -81,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
+%dir %{_datadir}/backgrounds/infinity
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
 %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
@@ -88,8 +101,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/stone_bird.jpg
 %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
+%{_datadir}/backgrounds/infinity/*.png
+%{_datadir}/backgrounds/infinity/infinity.xml
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
+%{_datadir}/gnome-background-properties/desktop-backgrounds-infinity.xml
 
 # extra contains big images, plus Propaganda tiles
 #files extra
@@ -108,6 +124,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Wed Aug 28 2007 Máirín Duffy <duffy@redhat.com> - 7.92-1
+- Add Infinity background
+
 * Wed Aug  8 2007 Matthias Clasen <mclasen@redhat.com> - 2.0-38
 - Update the licence field
 
