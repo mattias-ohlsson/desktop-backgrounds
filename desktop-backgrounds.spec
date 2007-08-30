@@ -4,13 +4,14 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 7.92
-Release: 1
+Release: 2
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.gz
+Source5: infinity.xml
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -72,6 +73,12 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgr
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/desktop-backgrounds-infinity.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
+# we need to save some space, so let's go to less images for now...
+install -m 0644 %{SOURCE5} $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/infinity.xml
+for i in 01 02 03 04 05 07 08 09 10 11 ; do 
+  rm -f $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/am$i.png
+  rm -f $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/pm$i.png
+done
 
 bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
@@ -124,6 +131,10 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Thu Aug 30 2007 Jeremy Katz <katzj@redhat.com> - 7.92-2
+- need to include less infinity backgrounds for now; the space usage 
+  kill livecds
+
 * Wed Aug 28 2007 Máirín Duffy <duffy@redhat.com> - 7.92-1
 - Add Infinity background
 

@@ -1,0 +1,54 @@
+<background>
+  <starttime>
+    <year>2007</year>
+    <month>8</month>
+    <day>28</day>
+    <hour>12</hour>
+    <minute>21</minute>
+    <second>23</second>
+  </starttime>
+
+<static>
+<duration>21600.0</duration>
+<file>/usr/share/backgrounds/infinity/am00.png</file>
+</static>
+
+<transition type="overlay">
+<duration>900.0</duration>
+<from>/usr/share/backgrounds/infinity/am00.png</from>
+<to>/usr/share/backgrounds/infinity/am06.png</to>
+</transition>
+
+<static>
+<duration>21600.0</duration>
+<file>/usr/share/backgrounds/infinity/am06.png</file>
+</static>
+
+<transition type="overlay">
+<duration>900.0</duration>
+<from>/usr/share/backgrounds/infinity/am06.png</from>
+<to>/usr/share/backgrounds/infinity/pm00.png</to>
+</transition>
+
+<static>
+<duration>21600.0</duration>
+<file>/usr/share/backgrounds/infinity/pm00.png</file>
+</static>
+
+<transition type="overlay">
+<duration>900.0</duration>
+<from>/usr/share/backgrounds/infinity/pm00.png</from>
+<to>/usr/share/backgrounds/infinity/pm06.png</to>
+</transition>
+
+<static>
+<duration>21600.0</duration>
+<file>/usr/share/backgrounds/infinity/pm06.png</file>
+</static>
+
+<transition type="overlay">
+<duration>900.0</duration>
+<from>/usr/share/backgrounds/infinity/pm06.png</from>
+<to>/usr/share/backgrounds/infinity/am00.png</to>
+</transition>
+</background>
