@@ -1,10 +1,10 @@
-%define rh_backgrounds_version 14
+%define rh_backgrounds_version 15
 %define infinity_version 0.0.1
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 7.92
-Release: 2
+Release: 3
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -87,9 +87,11 @@ for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/fro
 	rm -rf ${bgdir}/${I}
 done
 
-# default background is now in fedora-logos
-rm $RPM_BUILD_ROOT%{_datadir}/backgrounds/images/default.png
-rm $RPM_BUILD_ROOT%{_datadir}/backgrounds/images/default-wide.png
+# create links until artwork shows up
+(cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
+ ln -s infinity/am00.png default.png;
+ ln -s infinity/am00.png default-wide.png;
+ ln -s infinity/am00.png default-5_4.png)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -108,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/stone_bird.jpg
 %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
+%{_datadir}/backgrounds/images/*.png
 %{_datadir}/backgrounds/infinity/*.png
 %{_datadir}/backgrounds/infinity/infinity.xml
 %dir %{_datadir}/gnome-background-properties
@@ -131,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Tue Sep  4 2007 Ray Strode <rstrode@redhat.com> - 7.92-3
+- create links for default.png etc until more artwork shows up
+
 * Thu Aug 30 2007 Jeremy Katz <katzj@redhat.com> - 7.92-2
 - need to include less infinity backgrounds for now; the space usage 
   kill livecds
