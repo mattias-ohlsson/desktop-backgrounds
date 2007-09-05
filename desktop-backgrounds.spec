@@ -1,4 +1,4 @@
-%define rh_backgrounds_version 15
+%define rh_backgrounds_version 14
 %define infinity_version 0.0.1
 
 Summary: Desktop backgrounds
