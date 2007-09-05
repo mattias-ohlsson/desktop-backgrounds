@@ -89,9 +89,9 @@ done
 
 # create links until artwork shows up
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
- ln -s infinity/am00.png default.png;
- ln -s infinity/am00.png default-wide.png;
- ln -s infinity/am00.png default-5_4.png)
+ ln -sf infinity/am00.png default.png;
+ ln -sf infinity/am00.png default-wide.png;
+ ln -sf infinity/am00.png default-5_4.png)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -134,8 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
-* Tue Sep  4 2007 Ray Strode <rstrode@redhat.com> - 7.92-3
+* Wed Sep  5 2007 Ray Strode <rstrode@redhat.com> - 7.92-3
 - create links for default.png etc until more artwork shows up
+- start animated backgrounds at midnight
 
 * Thu Aug 30 2007 Jeremy Katz <katzj@redhat.com> - 7.92-2
 - need to include less infinity backgrounds for now; the space usage 
