@@ -105,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
 %{_datadir}/backgrounds/images/*.png
+%{_datadir}/backgrounds/images/*.jpg
 %{_datadir}/backgrounds/infinity/*.png
 %{_datadir}/backgrounds/infinity/infinity.xml
 %dir %{_datadir}/gnome-background-properties
