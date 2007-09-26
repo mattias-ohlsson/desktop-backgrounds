@@ -1,17 +1,16 @@
 %define rh_backgrounds_version 14
-%define infinity_version 0.0.1
+%define infinity_version 0.0.2
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 7.92
-Release: 5
+Release: 6
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.gz
-Source5: infinity.xml
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -73,12 +72,6 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgr
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/desktop-backgrounds-infinity.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
-# we need to save some space, so let's go to less images for now...
-install -m 0644 %{SOURCE5} $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/infinity.xml
-for i in 01 02 03 04 05 07 08 09 10 11 ; do 
-  rm -f $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/am$i.png
-  rm -f $RPM_BUILD_ROOT%{_prefix}/share/backgrounds/infinity/pm$i.png
-done
 
 bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
@@ -89,10 +82,10 @@ done
 
 # create links until artwork shows up
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
- ln -sf ../infinity/am00.png default.jpg;
- ln -sf ../infinity/am00.png default.png;
- ln -sf ../infinity/am00.png default-wide.png;
- ln -sf ../infinity/am00.png default-5_4.png)
+ ln -sf ../infinity/2-infinity-day.png default.jpg;
+ ln -sf ../infinity/2-infinity-day.png default.png;
+ ln -sf ../infinity/2-infinity-day.png default-wide.png;
+ ln -sf ../infinity/2-infinity-day.png default-5_4.png)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -135,6 +128,11 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Wed Sep 26 2007 Máirín Duffy <duffy@redhat.com> - 7.92-6
+- wallpapers redone so there is no more banding
+- wallpapers renamed
+- infinity animated file bugs fixed (hopefully)
+
 * Thu Sep 20 2007 Ray Strode <rstrode@redhat.com> - 7.92-5
 - fix symlinks again
 
