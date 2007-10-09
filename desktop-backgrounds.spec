@@ -1,16 +1,16 @@
 %define rh_backgrounds_version 14
-%define infinity_version 0.0.2
+%define infinity_version 0.0.3
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 7.92
-Release: 6
+Release: 7
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
-Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.gz
+Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -52,7 +52,7 @@ mv images/space/README* .
 (cd tiles && tar zxf %{SOURCE2})
 
 # add infinity
-tar zxf %{SOURCE4}
+tar xf %{SOURCE4}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -129,6 +129,10 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Tue Oct 9 2007 Ray Strode <rstrode@redhat.com> - 7.92-7
+- Upgrade desktop backgrounds to higher fidelity versions,
+  given by Máirín Duffy
+
 * Wed Sep 26 2007 Máirín Duffy <duffy@redhat.com> - 7.92-6
 - wallpapers redone so there is no more banding
 - wallpapers renamed
