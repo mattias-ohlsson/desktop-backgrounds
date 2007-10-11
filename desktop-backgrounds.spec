@@ -1,10 +1,10 @@
 %define rh_backgrounds_version 14
-%define infinity_version 0.0.3
+%define infinity_version 0.0.4
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 7.92
-Release: 7
+Release: 8
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -129,6 +129,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Thu Oct 11 2007 Ray Strode <rstrode@redhat.com> - 7.92-8
+- Scale images
+
 * Tue Oct 9 2007 Ray Strode <rstrode@redhat.com> - 7.92-7
 - Upgrade desktop backgrounds to higher fidelity versions,
   given by Máirín Duffy
