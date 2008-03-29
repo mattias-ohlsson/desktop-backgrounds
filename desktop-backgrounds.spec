@@ -1,16 +1,18 @@
 %define rh_backgrounds_version 14
 %define infinity_version 0.0.4
+%define waves_version 0.0.1
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
-Version: 7.92
-Release: 8
+Version: 8.92
+Release: 1
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.bz2
+Source5: waves-%{waves_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -54,6 +56,9 @@ mv images/space/README* .
 # add infinity
 tar xf %{SOURCE4}
 
+# add waves
+tar xjf %{SOURCE5}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -69,9 +74,16 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgr
 # copy animation xml file 
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/infinity.xml infinity
 
+mkdir waves
+# copy actual image files
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/*.png waves
+# copy animation xml file 
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/waves.xml waves
+
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/desktop-backgrounds-infinity.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
+cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/desktop-backgrounds-waves.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
 bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
@@ -97,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
 %dir %{_datadir}/backgrounds/infinity
+%dir %{_datadir}/backgrounds/waves
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
 %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
@@ -108,9 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/*.jpg
 %{_datadir}/backgrounds/infinity/*.png
 %{_datadir}/backgrounds/infinity/infinity.xml
+%{_datadir}/backgrounds/waves/*.png
+%{_datadir}/backgrounds/waves/waves.xml
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 %{_datadir}/gnome-background-properties/desktop-backgrounds-infinity.xml
+%{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
 
 # extra contains big images, plus Propaganda tiles
 #files extra
@@ -129,6 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Sat Mar 29 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-1
+- Add "Waves" backgrounds. Leave infinity for now
+
 * Thu Oct 11 2007 Ray Strode <rstrode@redhat.com> - 7.92-8
 - Scale images
 
