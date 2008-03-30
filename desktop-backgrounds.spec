@@ -1,11 +1,11 @@
 %define rh_backgrounds_version 14
 %define infinity_version 0.0.4
-%define waves_version 0.0.1
+%define waves_version 0.0.2
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 8.92
-Release: 1
+Release: 2
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -145,6 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Sat Mar 29 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-2
+- Move the "waves" animation start time back to the past
+
 * Sat Mar 29 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-1
 - Add "Waves" backgrounds. Leave infinity for now
 
