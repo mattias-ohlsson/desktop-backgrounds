@@ -1,17 +1,15 @@
 %define rh_backgrounds_version 14
-%define infinity_version 0.0.4
 %define waves_version 0.0.2
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 8.92
-Release: 2
+Release: 3
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
-Source4: desktop-backgrounds-infinity-%{infinity_version}.tar.bz2
 Source5: waves-%{waves_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
@@ -53,9 +51,6 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
-# add infinity
-tar xf %{SOURCE4}
-
 # add waves
 tar xjf %{SOURCE5}
 
@@ -68,12 +63,6 @@ cd $RPM_BUILD_ROOT%{_prefix}/share/backgrounds
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/images .
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 
-mkdir infinity
-# copy actual image files
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/*.png infinity
-# copy animation xml file 
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/infinity.xml infinity
-
 mkdir waves
 # copy actual image files
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/*.png waves
@@ -82,7 +71,6 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_
 
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
-cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-infinity-%{infinity_version}/desktop-backgrounds-infinity.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/desktop-backgrounds-waves.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
 bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
@@ -91,13 +79,6 @@ for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/fro
 	images/sneaking_branch.jpg images/space images/yellow_flower.jpg; do
 	rm -rf ${bgdir}/${I}
 done
-
-# create links until artwork shows up
-(cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
- ln -sf ../infinity/2-infinity-day.png default.jpg;
- ln -sf ../infinity/2-infinity-day.png default.png;
- ln -sf ../infinity/2-infinity-day.png default-wide.png;
- ln -sf ../infinity/2-infinity-day.png default-5_4.png)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
-%dir %{_datadir}/backgrounds/infinity
 %dir %{_datadir}/backgrounds/waves
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
@@ -119,13 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/earth_from_space.jpg
 %{_datadir}/backgrounds/images/*.png
 %{_datadir}/backgrounds/images/*.jpg
-%{_datadir}/backgrounds/infinity/*.png
-%{_datadir}/backgrounds/infinity/infinity.xml
 %{_datadir}/backgrounds/waves/*.png
 %{_datadir}/backgrounds/waves/waves.xml
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
-%{_datadir}/gnome-background-properties/desktop-backgrounds-infinity.xml
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
 
 # extra contains big images, plus Propaganda tiles
@@ -145,6 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Sun Apr  6 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-3
+- Drop infinity backgrounds, they will be moved to a separate package
+
 * Sat Mar 29 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-2
 - Move the "waves" animation start time back to the past
 
