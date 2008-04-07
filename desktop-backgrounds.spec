@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 8.92
-Release: 3
+Release: 4
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -51,6 +51,9 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
+# no FC5-era defaults, please
+(cd images && (mv default.png fedora-bubbles.png; mv default-wide.png fedora-bubles-wide.png))
+ 
 # add waves
 tar xjf %{SOURCE5}
 
@@ -122,6 +125,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Mon Apr  7 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-4
+- Rename FC5-era backgrounds 
+
 * Sun Apr  6 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-3
 - Drop infinity backgrounds, they will be moved to a separate package
 
