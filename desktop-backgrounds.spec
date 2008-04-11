@@ -4,13 +4,14 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 8.92
-Release: 4
+Release: 5
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
 Source5: waves-%{waves_version}.tar.bz2
+Source6: FedoraWaves-metadata.desktop
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: noarch
 
@@ -83,6 +84,19 @@ for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/fro
 	rm -rf ${bgdir}/${I}
 done
 
+# FedoraWaves theme for KDE4
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/images
+install -m 644 -p %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/metadata.desktop
+cd $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/
+ln -s ../../../backgrounds/waves/4-sulphuric-waves-night.800.png screenshot.png
+cd $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/images
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1024x768.png
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1280x800.png
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1280.png 1280x1024.png
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1440x900.png
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1600.png 1600x1200.png
+ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1920x1200.png
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -107,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
+%{_datadir}/wallpapers/Fedora_Waves
 
 # extra contains big images, plus Propaganda tiles
 #files extra
@@ -125,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 #exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
 
 %changelog
+* Fri Apr 11 2008 Than Ngo <than@redhat.com> 8.92-5
+- Add FedoraWaves theme for KDE4
+
 * Mon Apr  7 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-4
 - Rename FC5-era backgrounds 
 
