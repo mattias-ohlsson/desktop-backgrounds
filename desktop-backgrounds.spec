@@ -1,10 +1,10 @@
-%define rh_backgrounds_version 14
-%define waves_version 0.0.2
+%define rh_backgrounds_version 15
+%define waves_version 0.1.2
 
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
-Version: 8.92
-Release: 5
+Version: 9.0.0
+Release: 1
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -31,15 +31,15 @@ Obsoletes: desktop-backgrounds
 The desktop-backgrounds-basic package contains a good basic set of 
 images to use for your desktop background.
 
-#package extra
+%package compat
 
-#Summary: Desktop background images.
-#Group: Applications/Multimedia
+Summary: Compat desktop background images.
+Group: Applications/Multimedia
 
-#description extra
-#The desktop-backgrounds-extra package contains a larger set of images
-#to use for your desktop background. It builds on
-#desktop-backgrounds-basic.
+%description compat
+The desktop-backgrounds-compat package contains a filenames used
+in previous releases of Fedora to provide backward compatiblity
+with existing setups
 
 %prep
 %setup -n redhat-backgrounds-%{rh_backgrounds_version}
@@ -52,9 +52,6 @@ mv images/space/README* .
 # add propaganda
 (cd tiles && tar zxf %{SOURCE2})
 
-# no FC5-era defaults, please
-(cd images && (mv default.png fedora-bubbles.png; mv default-wide.png fedora-bubles-wide.png))
- 
 # add waves
 tar xjf %{SOURCE5}
 
@@ -87,20 +84,31 @@ done
 # FedoraWaves theme for KDE4
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/images
 install -m 644 -p %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/metadata.desktop
-cd $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/
-ln -s ../../../backgrounds/waves/4-sulphuric-waves-night.800.png screenshot.png
+(cd $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/;
+ln -s ../../../backgrounds/waves/waves-eeepc-3-night.png screenshot.png
 cd $RPM_BUILD_ROOT%{_datadir}/wallpapers/Fedora_Waves/contents/images
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1024x768.png
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1280x800.png
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1280.png 1280x1024.png
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1440x900.png
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1600.png 1600x1200.png
-ln -s ../../../../backgrounds/waves/4-sulphuric-waves-night.1920.png 1920x1200.png
+ln -s ../../../../backgrounds/waves/waves-normal-3-night.png 1024x768.png
+ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1280x800.png
+# FIXME: there doesn't seem to be a 5:4 image in the latest iteration
+ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1280x1024.png
+ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1440x900.png
+ln -s ../../../../backgrounds/waves/waves-normal-3-night.png 1600x1200.png
+ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
+)
+
+# Compatibility cruft
+(cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
+ln -s ../waves/waves-normal-0-morn.png default.png
+ln -s ../waves/waves-normal-0-morn.png default.jpg
+ln -s ../waves/waves-wide-0-morn.png default-wide.png
+ln -s ../waves/waves-wide-0-morn.png default-5_4.png
+cd ..
+ln -s waves/waves-normal-0-morn.png default.png
+)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# basic contains some reasonable sane basic tiles
 %files basic
 %defattr(-, root, root)
 %dir %{_datadir}/backgrounds
@@ -109,13 +117,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds/waves
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
-%{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
+%{_datadir}/backgrounds/images/earth_from_space.jpg
+%{_datadir}/backgrounds/images/flowers_and_leaves.jpg
 %{_datadir}/backgrounds/images/ladybugs.jpg
 %{_datadir}/backgrounds/images/stone_bird.jpg
-%{_datadir}/backgrounds/images/flowers_and_leaves.jpg
-%{_datadir}/backgrounds/images/earth_from_space.jpg
-%{_datadir}/backgrounds/images/*.png
-%{_datadir}/backgrounds/images/*.jpg
+%{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
 %{_datadir}/backgrounds/waves/*.png
 %{_datadir}/backgrounds/waves/waves.xml
 %dir %{_datadir}/gnome-background-properties
@@ -123,23 +129,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
 %{_datadir}/wallpapers/Fedora_Waves
 
-# extra contains big images, plus Propaganda tiles
-#files extra
-#defattr(-, root, root)
-#doc README.space PHOTO_FAQ.ps README.Propaganda
-#dir %{_datadir}/backgrounds
-#dir %{_datadir}/backgrounds/images
-#dir %{_datadir}/backgrounds/tiles
-#{_datadir}/backgrounds/tiles/Propaganda
-#{_datadir}/backgrounds/images/*
-## we'll see if rpm likes this
-#exclude %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
-#exclude %{_datadir}/backgrounds/images/ladybugs.jpg
-#exclude %{_datadir}/backgrounds/images/stone_bird.jpg
-#exclude %{_datadir}/backgrounds/images/flowers_and_leaves.jpg
-#exclude %{_datadir}/backgrounds/images/earth_from_space.jpg
+%files compat
+%defattr(-, root, root)
+%{_datadir}/backgrounds/images/default*
+%{_datadir}/backgrounds/default*
 
 %changelog
+* Fri Apr 11 2008 Ray Strode <rstrode@redhat.com> 8.92-6
+- Update wallpapers to latest iteration from art team
+- Add compat subpackage to provide compat-links for all the cruft
+  that's accumulated over the years
+
 * Fri Apr 11 2008 Than Ngo <than@redhat.com> 8.92-5
 - Add FedoraWaves theme for KDE4
 
