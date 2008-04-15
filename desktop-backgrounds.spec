@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
-* Fri Apr 11 2008 Ray Strode <rstrode@redhat.com> 8.92-6
+* Fri Apr 11 2008 Ray Strode <rstrode@redhat.com> 9.0.0-1
 - Update wallpapers to latest iteration from art team
 - Add compat subpackage to provide compat-links for all the cruft
   that's accumulated over the years
