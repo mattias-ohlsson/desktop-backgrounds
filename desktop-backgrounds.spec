@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 1
+Release: 2
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
-%{_datadir}/wallpapers/Fedora_Waves
+%{_datadir}/wallpapers
 
 %files compat
 %defattr(-, root, root)
@@ -135,6 +135,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Wed Oct 08 2008 Than Ngo <than@redhat.com> 9.0.0-2
+- own /usr/share/wallpapers
+
 * Fri Apr 11 2008 Ray Strode <rstrode@redhat.com> 9.0.0-1
 - Update wallpapers to latest iteration from art team
 - Add compat subpackage to provide compat-links for all the cruft
