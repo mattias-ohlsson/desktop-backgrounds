@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 2
+Release: 3
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -40,6 +40,15 @@ Group: Applications/Multimedia
 The desktop-backgrounds-compat package contains a filenames used
 in previous releases of Fedora to provide backward compatiblity
 with existing setups
+
+%package waves
+
+Summary: Waves desktop background images.
+Group: Applications/Multimedia
+
+%description waves
+The desktop-backgrounds-waves package contains "wave" backgrounds
+which were used in Fedora 9.
 
 %prep
 %setup -n redhat-backgrounds-%{rh_backgrounds_version}
@@ -114,7 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
-%dir %{_datadir}/backgrounds/waves
 %{_datadir}/backgrounds/tiles/*.png
 %{_datadir}/backgrounds/tiles/*jpg
 %{_datadir}/backgrounds/images/earth_from_space.jpg
@@ -122,12 +130,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/images/ladybugs.jpg
 %{_datadir}/backgrounds/images/stone_bird.jpg
 %{_datadir}/backgrounds/images/tiny_blast_of_red.jpg
-%{_datadir}/backgrounds/waves/*.png
-%{_datadir}/backgrounds/waves/waves.xml
 %dir %{_datadir}/gnome-background-properties
 %{_datadir}/gnome-background-properties/desktop-backgrounds-basic.xml
+%dir %{_datadir}/wallpapers
+
+%files waves
+%defattr(-, root, root)
+%dir %{_datadir}/backgrounds/waves
+%{_datadir}/backgrounds/waves/*.png
+%{_datadir}/backgrounds/waves/waves.xml
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
-%{_datadir}/wallpapers
+%{_datadir}/wallpapers/Fedora_Waves
 
 %files compat
 %defattr(-, root, root)
@@ -135,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Tue Oct 21 2008 Ray Strode <rstrode@redhat.com> 9.0.0-3
+- Move waves wallpapers to a subpackage
+
 * Wed Oct 08 2008 Than Ngo <than@redhat.com> 9.0.0-2
 - own /usr/share/wallpapers
 
