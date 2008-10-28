@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 3
+Release: 4
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -35,6 +35,7 @@ images to use for your desktop background.
 
 Summary: Compat desktop background images.
 Group: Applications/Multimedia
+Requires: solar-backgrounds
 
 %description compat
 The desktop-backgrounds-compat package contains a filenames used
@@ -107,12 +108,12 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Compatibility cruft
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../waves/waves-normal-0-morn.png default.png
-ln -s ../waves/waves-normal-0-morn.png default.jpg
-ln -s ../waves/waves-wide-0-morn.png default-wide.png
-ln -s ../waves/waves-wide-0-morn.png default-5_4.png
+ln -s ../solar/solar-normal-0-morn.png default.png
+ln -s ../solar/solar-normal-0-morn.png default.jpg
+ln -s ../solar/solar-wide-0-morn.png default-wide.png
+ln -s ../solar/solar-wide-0-morn.png default-5_4.png
 cd ..
-ln -s waves/waves-normal-0-morn.png default.png
+ln -s solar/solar-normal-0-morn.png default.png
 )
 
 %clean
@@ -148,6 +149,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Mon Oct 27 2008 Ray Strode <rstrode@redhat.com> 9.0.0-4
+- Make compat subpackage depend on solar backgrounds
+  (bug 468749)
+
 * Tue Oct 21 2008 Ray Strode <rstrode@redhat.com> 9.0.0-3
 - Move waves wallpapers to a subpackage
 
