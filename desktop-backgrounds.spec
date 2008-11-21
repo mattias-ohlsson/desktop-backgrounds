@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 5
+Release: 6
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -17,39 +17,39 @@ BuildArch: noarch
 
 %description
 The desktop-backgrounds package contains artwork intended 
-to be used as desktop wallpaper.
+to be used as desktop background image.
 
 %package basic
 
-Summary: Desktop background base set.
+Summary: Desktop backgrounds
 Group: Applications/Multimedia
 
 Provides: desktop-backgrounds
 Obsoletes: desktop-backgrounds
 
 %description basic
-The desktop-backgrounds-basic package contains a good basic set of 
-images to use for your desktop background.
+The desktop-backgrounds-basic package contains artwork intended 
+to be used as desktop background image.
 
 %package compat
 
-Summary: Compat desktop background images.
+Summary: Desktop backgrounds from previous Fedora releases
 Group: Applications/Multimedia
 Requires: solar-backgrounds
 
 %description compat
-The desktop-backgrounds-compat package contains a filenames used
+The desktop-backgrounds-compat package contains filenames used
 in previous releases of Fedora to provide backward compatiblity
-with existing setups
+with existing setups.
 
 %package waves
 
-Summary: Waves desktop background images.
+Summary: Desktop backgrounds for the Waves theme
 Group: Applications/Multimedia
 
 %description waves
-The desktop-backgrounds-waves package contains "wave" backgrounds
-which were used in Fedora 9.
+The desktop-backgrounds-waves package contains the "Waves" desktop
+backgrounds which were used in Fedora 9.
 
 %prep
 %setup -n redhat-backgrounds-%{rh_backgrounds_version}
@@ -148,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Fri Nov 21 2008 Matthias Clasen <mclasen@redhat.com> - 9.0.0-6
+- Tweak descriptions
+
 * Tue Nov  4 2008 Ray Strode <rstrode@redhat.com> 9.0.0-5
 - Fix compat links after solar-backgrounds restructuring
   (bug 469789)
