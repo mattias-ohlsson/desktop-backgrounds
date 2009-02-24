@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 6
+Release: 7
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -148,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 9.0.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Fri Nov 21 2008 Matthias Clasen <mclasen@redhat.com> - 9.0.0-6
 - Tweak descriptions
 
