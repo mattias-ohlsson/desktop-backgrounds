@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 7
+Release: 8
 License: LGPLv2
 Group: Applications/Multimedia
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -35,7 +35,7 @@ to be used as desktop background image.
 
 Summary: Desktop backgrounds from previous Fedora releases
 Group: Applications/Multimedia
-Requires: solar-backgrounds
+Requires: leonidas-backgrounds-common
 
 %description compat
 The desktop-backgrounds-compat package contains filenames used
@@ -108,11 +108,13 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Compatibility cruft
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../solar/standard/1600x1200/solar-0-morn.png default.png
-ln -s ../solar/standard/1600x1200/solar-0-morn.png default.jpg
-ln -s ../solar/wide/1680x1050/solar-0-morn.png default-5_4.png
+ln -s ../leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.png
+ln -s ../leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.jpg
+ln -s ../leonidas/lion/wide/1920x1200/leonidas-1-noon.jpg default-5_4.png
+ln -s ../leonidas/lion/wide/1920x1200/leonidas-1-noon.jpg default-5_4.jpg
 cd ..
-ln -s solar/standard/1600x1200/solar-0-morn.png default.png
+ln -s ./leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.png
+ln -s ./leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.jpg
 )
 
 %clean
@@ -148,6 +150,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Wed Apr 22 2009 Tom "spot" Callaway <tcallawa@redhat.com> - 9.0.0-8
+- fix compat subpackage
+
 * Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 9.0.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
