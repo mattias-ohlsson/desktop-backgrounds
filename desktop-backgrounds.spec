@@ -4,9 +4,9 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 9
+Release: 10
 License: LGPLv2
-Group: Applications/Multimedia
+Group: User Interface/Desktops
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
 Source2: Propaganda-1.0.0.tar.gz
 Source3: README.Propaganda
@@ -22,7 +22,7 @@ to be used as desktop background image.
 %package basic
 
 Summary: Desktop backgrounds
-Group: Applications/Multimedia
+Group: User Interface/Desktops
 
 Provides: desktop-backgrounds
 Obsoletes: desktop-backgrounds
@@ -34,8 +34,8 @@ to be used as desktop background image.
 %package compat
 
 Summary: Desktop backgrounds from previous Fedora releases
-Group: Applications/Multimedia
-Requires: leonidas-backgrounds-common
+Group: User Interface/Desktops
+Requires: constantine-backgrounds-single
 
 %description compat
 The desktop-backgrounds-compat package contains filenames used
@@ -45,7 +45,7 @@ with existing setups.
 %package waves
 
 Summary: Desktop backgrounds for the Waves theme
-Group: Applications/Multimedia
+Group: User Interface/Desktops
 
 %description waves
 The desktop-backgrounds-waves package contains the "Waves" desktop
@@ -108,13 +108,13 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Compatibility cruft
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.png
-ln -s ../leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.jpg
-ln -s ../leonidas/lion/wide/1920x1200/leonidas-1-noon.jpg default-5_4.png
-ln -s ../leonidas/lion/wide/1920x1200/leonidas-1-noon.jpg default-5_4.jpg
+ln -s ../constantine/default/normalish/constantine.png default.png
+ln -s ../constantine/default/normalish/constantine.png default.jpg
+ln -s ../constantine/default/wide/constantine.png default-5_4.png
+ln -s ../constantine/default/wide/constantine.png default-5_4.jpg
 cd ..
-ln -s ./leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.png
-ln -s ./leonidas/lion/normalish/1280x1024/leonidas-1-noon.jpg default.jpg
+ln -s ./constantine/default/normalish/constantine.png default.png
+ln -s ./constantine/default/normalish/constantine.png default.jpg
 )
 
 %clean
@@ -150,6 +150,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Sun Nov 01 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-10
+- Update for F12 constantine artwork
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 9.0.0-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
