@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 11
+Release: 12
 License: LGPLv2
 Group: User Interface/Desktops
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
-* Mon Mar  1 2010 Matthias Clasen <mclasen@redhat.com> - 9.0.0-11
+* Mon Mar  1 2010 Matthias Clasen <mclasen@redhat.com> - 9.0.0-12
 - Fix a directory ownership issue
 
 * Sun Nov 01 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-10
