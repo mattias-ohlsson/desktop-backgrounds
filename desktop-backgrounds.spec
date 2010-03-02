@@ -4,7 +4,7 @@
 Summary: Desktop backgrounds
 Name: desktop-backgrounds
 Version: 9.0.0
-Release: 10
+Release: 11
 License: LGPLv2
 Group: User Interface/Desktops
 Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
@@ -122,7 +122,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files basic
 %defattr(-, root, root)
-%dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
@@ -150,6 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Mon Mar  1 2010 Matthias Clasen <mclasen@redhat.com> - 9.0.0-11
+- Fix a directory ownership issue
+
 * Sun Nov 01 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-10
 - Update for F12 constantine artwork
 
