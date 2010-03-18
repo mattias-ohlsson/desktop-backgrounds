@@ -1,55 +1,55 @@
-%define rh_backgrounds_version 15
-%define waves_version 0.1.2
+%global rh_backgrounds_version 15
+%global waves_version 0.1.2
 
-Summary: Desktop backgrounds
-Name: desktop-backgrounds
-Version: 9.0.0
-Release: 12
-License: LGPLv2
-Group: User Interface/Desktops
-Source: redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
-Source2: Propaganda-1.0.0.tar.gz
-Source3: README.Propaganda
-Source5: waves-%{waves_version}.tar.bz2
-Source6: FedoraWaves-metadata.desktop
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildArch: noarch
+Name:           desktop-backgrounds
+Version:        9.0.0
+Release:        13
+Summary:        Desktop backgrounds
+
+Group:          User Interface/Desktops
+License:        LGPLv2
+Source0:        redhat-backgrounds-%{rh_backgrounds_version}.tar.bz2
+Source2:        Propaganda-1.0.0.tar.gz
+Source3:        README.Propaganda
+Source5:        waves-%{waves_version}.tar.bz2
+Source6:        FedoraWaves-metadata.desktop
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
 
 %description
-The desktop-backgrounds package contains artwork intended 
-to be used as desktop background image.
+The desktop-backgrounds package contains artwork intended to be used as 
+desktop background image.
 
-%package basic
 
-Summary: Desktop backgrounds
-Group: User Interface/Desktops
+%package        basic
+Summary:        Desktop backgrounds
+Group:          User Interface/Desktops
+Provides:       desktop-backgrounds
+Obsoletes:      desktop-backgrounds
 
-Provides: desktop-backgrounds
-Obsoletes: desktop-backgrounds
+%description    basic
+The desktop-backgrounds-basic package contains artwork intended to be used as 
+desktop background image.
 
-%description basic
-The desktop-backgrounds-basic package contains artwork intended 
-to be used as desktop background image.
 
-%package compat
+%package        compat
+Summary:        Desktop backgrounds from previous Fedora releases
+Group:          User Interface/Desktops
+Requires:       goddard-backgrounds-single
 
-Summary: Desktop backgrounds from previous Fedora releases
-Group: User Interface/Desktops
-Requires: constantine-backgrounds-single
-
-%description compat
+%description    compat
 The desktop-backgrounds-compat package contains filenames used
 in previous releases of Fedora to provide backward compatiblity
 with existing setups.
 
-%package waves
+%package        waves
+Summary:        Desktop backgrounds for the Waves theme
+Group:          User Interface/Desktops
 
-Summary: Desktop backgrounds for the Waves theme
-Group: User Interface/Desktops
+%description    waves
+The desktop-backgrounds-waves package contains the "Waves" desktop backgrounds
+which were used in Fedora 9.
 
-%description waves
-The desktop-backgrounds-waves package contains the "Waves" desktop
-backgrounds which were used in Fedora 9.
 
 %prep
 %setup -n redhat-backgrounds-%{rh_backgrounds_version}
@@ -80,11 +80,11 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_
 # copy animation xml file 
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/waves.xml waves
 
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/desktop-backgrounds-basic.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/desktop-backgrounds-waves.xml $RPM_BUILD_ROOT%{_prefix}/share/gnome-background-properties
 
-bgdir=$RPM_BUILD_ROOT%{_prefix}/share/backgrounds
+bgdir=$RPM_BUILD_ROOT%{_datadir}/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
 	images/leafdrops.jpg images/lightrays-transparent.png images/lightrays.png images/lightrays2.png images/raingutter.jpg images/riverstreet_rail.jpg \
 	images/sneaking_branch.jpg images/space images/yellow_flower.jpg; do
@@ -108,13 +108,10 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Compatibility cruft
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../constantine/default/normalish/constantine.png default.png
-ln -s ../constantine/default/normalish/constantine.png default.jpg
-ln -s ../constantine/default/wide/constantine.png default-5_4.png
-ln -s ../constantine/default/wide/constantine.png default-5_4.jpg
+ln -s ../goddard/default/standard/goddard.png default.png
+ln -s ../goddard/default/wide/goddard.png default-5_4.png
 cd ..
-ln -s ./constantine/default/normalish/constantine.png default.png
-ln -s ./constantine/default/normalish/constantine.png default.jpg
+ln -s ./goddard/default/standard/goddard.png default.png
 )
 
 %clean
@@ -122,6 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files basic
 %defattr(-, root, root)
+%dir %{_datadir}/backgrounds
 %dir %{_datadir}/backgrounds/tiles
 %dir %{_datadir}/backgrounds/images
 %{_datadir}/backgrounds/tiles/*.png
@@ -149,8 +147,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Thu Mar 18 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-13
+- Update for F13 Goddard artwork
+
 * Mon Mar  1 2010 Matthias Clasen <mclasen@redhat.com> - 9.0.0-12
 - Fix a directory ownership issue
+
+* Tue Nov 03 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-11
+- Bump release for RC 
 
 * Sun Nov 01 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-10
 - Update for F12 constantine artwork
