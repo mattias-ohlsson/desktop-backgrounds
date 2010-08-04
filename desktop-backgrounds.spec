@@ -3,7 +3,7 @@
 
 Name:           desktop-backgrounds
 Version:        9.0.0
-Release:        13
+Release:        14
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -35,7 +35,7 @@ desktop background image.
 %package        compat
 Summary:        Desktop backgrounds from previous Fedora releases
 Group:          User Interface/Desktops
-Requires:       goddard-backgrounds-single
+Requires:       laughlin-backgrounds-single
 
 %description    compat
 The desktop-backgrounds-compat package contains filenames used
@@ -108,10 +108,10 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Compatibility cruft
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../goddard/default/standard/goddard.png default.png
-ln -s ../goddard/default/wide/goddard.png default-5_4.png
+ln -s ../laughlin/default/standard/laughlin.png default.png
+ln -s ../laughlin/default/wide/laughlin.png default-5_4.png
 cd ..
-ln -s ./goddard/default/standard/goddard.png default.png
+ln -s ./laughlin/default/standard/laughlin.png default.png
 )
 
 %clean
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Thu Aug 05 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-14
+- Update for F14 Laughlin artwork
+
 * Thu Mar 18 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-13
 - Update for F13 Goddard artwork
 
