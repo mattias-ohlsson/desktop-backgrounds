@@ -3,7 +3,7 @@
 
 Name:           desktop-backgrounds
 Version:        9.0.0
-Release:        14
+Release:        15%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -24,8 +24,8 @@ desktop background image.
 %package        basic
 Summary:        Desktop backgrounds
 Group:          User Interface/Desktops
-Provides:       desktop-backgrounds
-Obsoletes:      desktop-backgrounds
+Provides:       desktop-backgrounds = %{version}-%{release}
+Obsoletes:      desktop-backgrounds < %{version}-%{release}
 
 %description    basic
 The desktop-backgrounds-basic package contains artwork intended to be used as 
@@ -52,9 +52,9 @@ which were used in Fedora 9.
 
 
 %prep
-%setup -n redhat-backgrounds-%{rh_backgrounds_version}
+%setup -qn redhat-backgrounds-%{rh_backgrounds_version}
 
-# move things where %doc can find them
+# move things where %%doc can find them
 cp %{SOURCE3} .
 mv images/space/*.ps .
 mv images/space/README* .
@@ -86,9 +86,9 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_
 
 bgdir=$RPM_BUILD_ROOT%{_datadir}/backgrounds
 for I in tiles/Propaganda images/dewdop_leaf.jpg images/dragonfly.jpg images/frosty_pipes.jpg images/in_flight.jpg images/leaf_veins.jpg \
-	images/leafdrops.jpg images/lightrays-transparent.png images/lightrays.png images/lightrays2.png images/raingutter.jpg images/riverstreet_rail.jpg \
-	images/sneaking_branch.jpg images/space images/yellow_flower.jpg; do
-	rm -rf ${bgdir}/${I}
+        images/leafdrops.jpg images/lightrays-transparent.png images/lightrays.png images/lightrays2.png images/raingutter.jpg images/riverstreet_rail.jpg \
+        images/sneaking_branch.jpg images/space images/yellow_flower.jpg; do
+        rm -rf ${bgdir}/${I}
 done
 
 # FedoraWaves theme for KDE4
@@ -147,8 +147,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Thu Aug 12 2010 Martin Sourada <mso@fedoraproject.org> - 9.0.0-15
+- Rebuild, add dist tag.
+- Properly versioned provides/obsoletes for the -basic subpackage
+
 * Thu Aug 05 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-14
 - Update for F14 Laughlin artwork
+
+* Fri Apr 16 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-14
+- Adjustments for recent Goddard artwork changes
 
 * Thu Mar 18 2010 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-13
 - Update for F13 Goddard artwork
