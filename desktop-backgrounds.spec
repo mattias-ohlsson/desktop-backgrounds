@@ -1,9 +1,11 @@
 %global rh_backgrounds_version 15
 %global waves_version 0.1.2
+%global fedora_release_name lovelock
+%global Fedora_Release_Name Lovelock
 
 Name:           desktop-backgrounds
-Version:        9.0.0
-Release:        15%{?dist}
+Version:        15.0.0
+Release:        1%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -13,8 +15,12 @@ Source2:        Propaganda-1.0.0.tar.gz
 Source3:        README.Propaganda
 Source5:        waves-%{waves_version}.tar.bz2
 Source6:        FedoraWaves-metadata.desktop
+Source7:        desktop-backgrounds-fedora.xml
+Source8:        fedora-metadata.desktop
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+# for %%_kde4_* macros macros
+BuildRequires:  kde-filesystem
 
 %description
 The desktop-backgrounds package contains artwork intended to be used as 
@@ -31,16 +37,50 @@ Obsoletes:      desktop-backgrounds < %{version}-%{release}
 The desktop-backgrounds-basic package contains artwork intended to be used as 
 desktop background image.
 
+%package        gnome
+Summary:        The default Fedora wallpaper from GNOME desktop
+Group:          User Interface/Desktops
+Requires:       %{fedora_release_name}-backgrounds-gnome
+Provides:       system-backgrounds-gnome = %{version}-%{release}
+License:        CC-BY-SA
+
+%description    gnome
+The desktop-backgrounds-gnome package contains file-names used by GNOME desktop
+environment to set up the default background.
+
+%package        kde
+Summary:        The default Fedora wallpaper from KDE desktop
+Group:          User Interface/Desktops
+Requires:       %{fedora_release_name}-backgrounds-kde
+Provides:       system-backgrounds-kde = %{version}-%{release}
+License:        CC-BY-SA
+
+%description    kde
+The desktop-backgrounds-kde package contains file-names used by KDE desktop
+environment to set up the default wallpaper.
+
+%package        xfce
+Summary:        The default Fedora wallpaper from XFCE desktop
+Group:          User Interface/Desktops
+Requires:       %{fedora_release_name}-backgrounds-xfce
+Provides:       system-backgrounds-xfce = %{version}-%{release}
+License:        CC-BY-SA
+
+%description    xfce
+The desktop-backgrounds-xfce package contains file-names used by XFCE desktop
+environment to set up the default backdrop.
 
 %package        compat
-Summary:        Desktop backgrounds from previous Fedora releases
+Summary:        The default Fedora wallpaper for less common DEs
 Group:          User Interface/Desktops
-Requires:       laughlin-backgrounds-single
+Requires:       %{fedora_release_name}-backgrounds-single
+Provides:       system-backgrounds-compat = %{version}-%{release}
+License:        CC-BY-SA
 
 %description    compat
-The desktop-backgrounds-compat package contains filenames used
-in previous releases of Fedora to provide backward compatiblity
-with existing setups.
+The desktop-backgrounds-compat package contains file-names used
+by less common Desktop Environments such as LXDE to set up the 
+default wallpaper.
 
 %package        waves
 Summary:        Desktop backgrounds for the Waves theme
@@ -106,12 +146,37 @@ ln -s ../../../../backgrounds/waves/waves-normal-3-night.png 1600x1200.png
 ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 )
 
-# Compatibility cruft
+# Defalts for various desktops:
+#   for GNOME
+install -m 644 -p %{SOURCE7} \
+  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
+  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+/bin/ln -s %{fedora_release_name}/default/%{fedora_release_name}.xml \
+           $RPM_BUILD_ROOT%{_datadir}/backgrounds/default.xml
+#   for KDE
+mkdir -p $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora
+install -m 644 -p %{SOURCE8} \
+  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/fedora-metadata.desktop
+sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
+  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/fedora-metadata.desktop
+/bin/ln -s ../%{Fedora_Release_Name}/contents \
+		   $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/contents
+#   for XFCE
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops
+/bin/ln -s %{fedora_release_name}.png \
+           $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops/default.png
+#   and for the rest (e.g. LXDE)
 (cd $RPM_BUILD_ROOT%{_datadir}/backgrounds/images;
-ln -s ../laughlin/default/standard/laughlin.png default.png
-ln -s ../laughlin/default/wide/laughlin.png default-5_4.png
+ln -s ../%{fedora_release_name}/default/standard/%{fedora_release_name}.png \
+      default.png
+ln -s ../%{fedora_release_name}/default/normalish/%{fedora_release_name}.png \
+      default-5_4.png
+ln -s ../%{fedora_release_name}/default/wide/%{fedora_release_name}.png \
+      default-16_10.png
 cd ..
-ln -s ./laughlin/default/standard/laughlin.png default.png
+ln -s ./%{fedora_release_name}/default/standard/%{fedora_release_name}.png \
+      default.png
 )
 
 %clean
@@ -141,12 +206,33 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-background-properties/desktop-backgrounds-waves.xml
 %{_datadir}/wallpapers/Fedora_Waves
 
+%files gnome
+%defattr(-, root, root)
+%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+%{_datadir}/backgrounds/default.xml
+
+%files kde
+%defattr(-, root, root)
+%{_kde4_datadir}/wallpapers/Fedora
+
+%files xfce
+%defattr(-, root, root)
+%{_datadir}/xfce4/backdrops/default.png
+
 %files compat
 %defattr(-, root, root)
 %{_datadir}/backgrounds/images/default*
 %{_datadir}/backgrounds/default*
 
 %changelog
+* Mon Feb 07 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-1
+- Provide file-names for default wallpapers
+  * new subpackages -gnome, -kde, xfce for the various DEs
+  * -compat subpackage is really for setting the default wallpaper for the
+    other desktops like LXDE, adjust the description and summary
+  * use correct suffix in file-names in -compat subpackage
+- Sync version with Fedora release
+
 * Thu Aug 12 2010 Martin Sourada <mso@fedoraproject.org> - 9.0.0-15
 - Rebuild, add dist tag.
 - Properly versioned provides/obsoletes for the -basic subpackage
