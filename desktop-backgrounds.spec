@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -149,19 +149,19 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 # Defalts for various desktops:
 #   for GNOME
 install -m 644 -p %{SOURCE7} \
-  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
 sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
-  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
 /bin/ln -s %{fedora_release_name}/default/%{fedora_release_name}.xml \
            $RPM_BUILD_ROOT%{_datadir}/backgrounds/default.xml
 #   for KDE
-mkdir -p $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora
+mkdir -p $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default
 install -m 644 -p %{SOURCE8} \
-  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/fedora-metadata.desktop
+  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/default-metadata.desktop
 sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
-  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/fedora-metadata.desktop
+  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/default-metadata.desktop
 /bin/ln -s ../%{Fedora_Release_Name}/contents \
-		   $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Fedora/contents
+		   $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/contents
 #   for XFCE
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops
 /bin/ln -s %{fedora_release_name}.png \
@@ -208,12 +208,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gnome
 %defattr(-, root, root)
-%{_datadir}/gnome-background-properties/desktop-backgrounds-fedora.xml
+%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
 %{_datadir}/backgrounds/default.xml
 
 %files kde
 %defattr(-, root, root)
-%{_kde4_datadir}/wallpapers/Fedora
+%{_kde4_datadir}/wallpapers/Default
 
 %files xfce
 %defattr(-, root, root)
@@ -222,9 +222,13 @@ rm -rf $RPM_BUILD_ROOT
 %files compat
 %defattr(-, root, root)
 %{_datadir}/backgrounds/images/default*
-%{_datadir}/backgrounds/default*
+%{_datadir}/backgrounds/default.png
 
 %changelog
+* Mon Feb 07 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-2
+- The file-names should not contain the word fedora for the system-backgrounds*
+  virtual provides to be more effective
+
 * Mon Feb 07 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-1
 - Provide file-names for default wallpapers
   * new subpackages -gnome, -kde, xfce for the various DEs
