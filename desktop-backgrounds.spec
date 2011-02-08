@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -225,6 +225,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 15.0.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Mon Feb 07 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-2
 - The file-names should not contain the word fedora for the system-backgrounds*
   virtual provides to be more effective
