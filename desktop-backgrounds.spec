@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -19,8 +19,6 @@ Source7:        desktop-backgrounds-fedora.xml
 Source8:        fedora-metadata.desktop
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-# for %%_kde4_* macros macros
-BuildRequires:  kde-filesystem
 
 %description
 The desktop-backgrounds package contains artwork intended to be used as 
@@ -47,17 +45,6 @@ License:        CC-BY-SA
 %description    gnome
 The desktop-backgrounds-gnome package contains file-names used by GNOME desktop
 environment to set up the default background.
-
-%package        kde
-Summary:        The default Fedora wallpaper from KDE desktop
-Group:          User Interface/Desktops
-Requires:       %{fedora_release_name}-backgrounds-kde
-Provides:       system-backgrounds-kde = %{version}-%{release}
-License:        CC-BY-SA
-
-%description    kde
-The desktop-backgrounds-kde package contains file-names used by KDE desktop
-environment to set up the default wallpaper.
 
 %package        xfce
 Summary:        The default Fedora wallpaper from XFCE desktop
@@ -154,14 +141,7 @@ sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
   $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
 /bin/ln -s %{fedora_release_name}/default/%{fedora_release_name}.xml \
            $RPM_BUILD_ROOT%{_datadir}/backgrounds/default.xml
-#   for KDE
-mkdir -p $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default
-install -m 644 -p %{SOURCE8} \
-  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/default-metadata.desktop
-sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
-  $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/default-metadata.desktop
-/bin/ln -s ../%{Fedora_Release_Name}/contents \
-		   $RPM_BUILD_ROOT%{_kde4_datadir}/wallpapers/Default/contents
+#   for KDE, this is handled in kde-settings
 #   for XFCE
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops
 /bin/ln -s %{fedora_release_name}.png \
@@ -211,10 +191,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
 %{_datadir}/backgrounds/default.xml
 
-%files kde
-%defattr(-, root, root)
-%{_kde4_datadir}/wallpapers/Default
-
 %files xfce
 %defattr(-, root, root)
 %{_datadir}/xfce4/backdrops/default.png
@@ -225,6 +201,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Mon Mar 07 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> - 15.0.0-4
+- Drop unused -kde subpackage, we set the default through kde-settings & pull it
+  in through system-plasma-desktoptheme, which is Provided by lovelock-kde-theme
+
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 15.0.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
