@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -43,8 +43,7 @@ Provides:       system-backgrounds-gnome = %{version}-%{release}
 License:        CC-BY-SA
 
 %description    gnome
-The desktop-backgrounds-gnome package contains file-names used by GNOME desktop
-environment to set up the default background.
+The desktop-backgrounds-gnome package sets default background in gnome.
 
 %package        xfce
 Summary:        The default Fedora wallpaper from XFCE desktop
@@ -135,12 +134,11 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 
 # Defalts for various desktops:
 #   for GNOME
-install -m 644 -p %{SOURCE7} \
-  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
-sed -i 's/@RELEASE_NAME@/%{Fedora_Release_Name}/' \
-  $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
-/bin/ln -s %{fedora_release_name}/default/%{fedora_release_name}.xml \
-           $RPM_BUILD_ROOT%{_datadir}/backgrounds/default.xml
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas
+/bin/echo '[org.gnome.desktop.background]' > \
+	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+/bin/echo "picture-filename='%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'"	>> \
+	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 #   for KDE, this is handled in kde-settings
 #   for XFCE
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops
@@ -161,6 +159,15 @@ ln -s ./%{fedora_release_name}/default/standard/%{fedora_release_name}.png \
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%posttrans
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+
+%postun
+if [ $1 -eq 0 ]; then
+  glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
+fi
+
 
 %files basic
 %defattr(-, root, root)
@@ -188,8 +195,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gnome
 %defattr(-, root, root)
-%{_datadir}/gnome-background-properties/desktop-backgrounds-default.xml
-%{_datadir}/backgrounds/default.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 
 %files xfce
 %defattr(-, root, root)
@@ -201,6 +207,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Tue Mar 22 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-5
+- Set default wallpaper for gnome
+
 * Mon Mar 07 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> - 15.0.0-4
 - Drop unused -kde subpackage, we set the default through kde-settings & pull it
   in through system-plasma-desktoptheme, which is Provided by lovelock-kde-theme
