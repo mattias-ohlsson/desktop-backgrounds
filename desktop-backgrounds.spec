@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -140,7 +140,7 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas
 /bin/echo '[org.gnome.desktop.background]' > \
 	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
-/bin/echo "picture-uri='%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'"	>> \
+/bin/echo "picture-uri='file://%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'"	>> \
 	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 #   for KDE, this is handled in kde-settings
 #   for XFCE
@@ -210,6 +210,9 @@ fi
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Tue Mar 22 2011 Tom Callaway <spot@fedoraproject.org> - 15.0.0-7
+- picture-uri needs to be an actual uri
+
 * Tue Mar 22 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-6
 - Update for upcoming changes in gnome-desktop-2.91.92
   * picture-uri is used instead of picture-filename to select background
