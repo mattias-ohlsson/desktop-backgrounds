@@ -143,13 +143,13 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 #   for GNOME
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas
 /bin/echo '[org.gnome.desktop.background]' > \
-	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+    $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 %if 0%{?fedora} == 15
-/bin/echo "picture-uri='file://%{_datadir}/backgrounds/lovelock/default-stripes/lovelock.xml'"	>> \
-	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+/bin/echo "picture-uri='file://%{_datadir}/backgrounds/lovelock/default-stripes/lovelock.xml'" >> \
+    $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 %else
-/bin/echo "picture-uri='file://%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'"	>> \
-	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+/bin/echo "picture-uri='file://%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'" >> \
+    $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
 %endif
 #   for KDE, this is handled in kde-settings
 #   for XFCE
@@ -172,14 +172,13 @@ ln -s ./%{fedora_release_name}/default/standard/%{fedora_release_name}.png \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%posttrans
+%posttrans gnome
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
-%postun
+%postun gnome
 if [ $1 -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 fi
-
 
 %files basic
 %defattr(-, root, root)
@@ -221,7 +220,10 @@ fi
 %changelog
 * Sat Apr 02 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-8
 - Use stripes version of the wallpaper on F15 in Gnome
-- We should require the schema we override, not the component that uses it
+- We should require the schema we override, not the component that uses 
+  it
+- Fix the scriplets
+- Minor spec clean-up
 
 * Tue Mar 22 2011 Tom Callaway <spot@fedoraproject.org> - 15.0.0-7
 - picture-uri needs to be an actual uri
