@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        15.0.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -38,10 +38,14 @@ desktop background image.
 %package        gnome
 Summary:        The default Fedora wallpaper from GNOME desktop
 Group:          User Interface/Desktops
+%if 0%{?fedora} == 15
+Requires:       lovelock-backgrounds-stripes-gnome
+%else
 Requires:       %{fedora_release_name}-backgrounds-gnome
+%endif
 # starting with this release, gnome uses picture-uri instead of picture-filename
 # see gnome bz #633983
-Requires:       gnome-desktop3 >= 2.91.92
+Requires:       gsettings-desktop-schemas >= 2.91.92
 Provides:       system-backgrounds-gnome = %{version}-%{release}
 License:        CC-BY-SA
 
@@ -140,8 +144,13 @@ ln -s ../../../../backgrounds/waves/waves-wide-3-night.png 1920x1200.png
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas
 /bin/echo '[org.gnome.desktop.background]' > \
 	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+%if 0%{?fedora} == 15
+/bin/echo "picture-uri='file://%{_datadir}/backgrounds/lovelock/default-stripes/lovelock.xml'"	>> \
+	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+%else
 /bin/echo "picture-uri='file://%{_datadir}/backgrounds/%{fedora_release_name}/default/%{fedora_release_name}.xml'"	>> \
 	$RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.desktop.background.fedora.gschema.override
+%endif
 #   for KDE, this is handled in kde-settings
 #   for XFCE
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/xfce4/backdrops
@@ -210,6 +219,10 @@ fi
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Sat Apr 02 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-8
+- Use stripes version of the wallpaper on F15 in Gnome
+- We should require the schema we override, not the component that uses it
+
 * Tue Mar 22 2011 Tom Callaway <spot@fedoraproject.org> - 15.0.0-7
 - picture-uri needs to be an actual uri
 
