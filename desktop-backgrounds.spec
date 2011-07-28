@@ -1,11 +1,11 @@
-%global rh_backgrounds_version 15
+%global rh_backgrounds_version 16
 %global waves_version 0.1.2
-%global fedora_release_name lovelock
-%global Fedora_Release_Name Lovelock
+%global fedora_release_name verne
+%global Fedora_Release_Name Verne
 
 Name:           desktop-backgrounds
-Version:        15.0.0
-Release:        8%{?dist}
+Version:        16.0.0
+Release:        1%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -21,7 +21,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 %description
-The desktop-backgrounds package contains artwork intended to be used as 
+The desktop-backgrounds package contains artwork intended to be used as
 desktop background image.
 
 
@@ -32,7 +32,7 @@ Provides:       desktop-backgrounds = %{version}-%{release}
 Obsoletes:      desktop-backgrounds < %{version}-%{release}
 
 %description    basic
-The desktop-backgrounds-basic package contains artwork intended to be used as 
+The desktop-backgrounds-basic package contains artwork intended to be used as
 desktop background image.
 
 %package        gnome
@@ -72,7 +72,7 @@ License:        CC-BY-SA
 
 %description    compat
 The desktop-backgrounds-compat package contains file-names used
-by less common Desktop Environments such as LXDE to set up the 
+by less common Desktop Environments such as LXDE to set up the
 default wallpaper.
 
 %package        waves
@@ -110,7 +110,7 @@ cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/tiles .
 mkdir waves
 # copy actual image files
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/*.png waves
-# copy animation xml file 
+# copy animation xml file
 cp -a $RPM_BUILD_DIR/redhat-backgrounds-%{rh_backgrounds_version}/waves-%{waves_version}/waves.xml waves
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome-background-properties
@@ -218,9 +218,12 @@ fi
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Thu Jul 28 2011 Martin Sourada <mso@fedoraproject.org> - 16.0.0-1
+- Switch to Verne
+
 * Sat Apr 02 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-8
 - Use stripes version of the wallpaper on F15 in Gnome
-- We should require the schema we override, not the component that uses 
+- We should require the schema we override, not the component that uses
   it
 - Fix the scriplets
 - Minor spec clean-up
@@ -272,7 +275,7 @@ fi
 - Fix a directory ownership issue
 
 * Tue Nov 03 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-11
-- Bump release for RC 
+- Bump release for RC
 
 * Sun Nov 01 2009 Christoph Wickert <cwickert@fedoraproject.org> - 9.0.0-10
 - Update for F12 constantine artwork
@@ -312,7 +315,7 @@ fi
 - Add FedoraWaves theme for KDE4
 
 * Mon Apr  7 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-4
-- Rename FC5-era backgrounds 
+- Rename FC5-era backgrounds
 
 * Sun Apr  6 2008 Matthias Clasen <mclasen@redhat.com> - 8.92-3
 - Drop infinity backgrounds, they will be moved to a separate package
@@ -346,7 +349,7 @@ fi
 - start animated backgrounds at midnight
 
 * Thu Aug 30 2007 Jeremy Katz <katzj@redhat.com> - 7.92-2
-- need to include less infinity backgrounds for now; the space usage 
+- need to include less infinity backgrounds for now; the space usage
   kill livecds
 
 * Wed Aug 28 2007 Máirín Duffy <duffy@redhat.com> - 7.92-1
@@ -434,7 +437,7 @@ fi
 - redhat-backgrounds-5
 
 * Tue Sep 23 2003 Michael Fulbright <msf@redhat.com> 2.0-16
-- new fedora background 
+- new fedora background
 - (this change was never committed to cvs -hp)
 
 * Thu Jul 17 2003 Havoc Pennington <hp@redhat.com> 2.0-15
@@ -478,9 +481,9 @@ fi
 * Sun Jun 16 2002 Havoc Pennington <hp@redhat.com>
 - redo it, now it includes the tile/image collection
   redhat-backgrounds from CVS, plus propaganda
-- move things to datadir/share/backgrounds/images 
+- move things to datadir/share/backgrounds/images
   and datadir/share/backgrounds/wallpapers
-- split into a small basic package and an extra package, 
+- split into a small basic package and an extra package,
   so we can have packages require the basic package
   without sucking in huge images
 - move space images into devserv CVS
