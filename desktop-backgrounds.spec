@@ -1,4 +1,4 @@
-%global rh_backgrounds_version 16
+%global rh_backgrounds_version 15
 %global waves_version 0.1.2
 %global fedora_release_name verne
 %global Fedora_Release_Name Verne
@@ -218,7 +218,7 @@ fi
 %{_datadir}/backgrounds/default.png
 
 %changelog
-* Thu Jul 28 2011 Martin Sourada <mso@fedoraproject.org> - 16.0.0-1
+* Fri Jul 29 2011 Martin Sourada <mso@fedoraproject.org> - 16.0.0-1
 - Switch to Verne
 
 * Sat Apr 02 2011 Martin Sourada <mso@fedoraproject.org> - 15.0.0-8
