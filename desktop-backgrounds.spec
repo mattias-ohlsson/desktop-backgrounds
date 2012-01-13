@@ -5,7 +5,7 @@
 
 Name:           desktop-backgrounds
 Version:        16.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Desktop backgrounds
 
 Group:          User Interface/Desktops
@@ -218,6 +218,9 @@ fi
 %{_datadir}/backgrounds/default.png
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 16.0.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Fri Jul 29 2011 Martin Sourada <mso@fedoraproject.org> - 16.0.0-1
 - Switch to Verne
 
