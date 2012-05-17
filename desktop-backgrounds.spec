@@ -1,7 +1,7 @@
 %global rh_backgrounds_version 15
 %global waves_version 0.1.2
-%global fedora_release_name beefy-miracle
-%global Fedora_Release_Name Beefy_Miracle
+%global fedora_release_name winston
+%global Fedora_Release_Name Winston
 
 Name:           desktop-backgrounds
 Version:        17.0.0
